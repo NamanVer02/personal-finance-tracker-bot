@@ -1,9 +1,12 @@
 # server.py
 from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
 import requests
 from bot import generate_response  # Import the chatbot function
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Hardcoded credentials and URLs
 LOGIN_URL = "http://localhost:8080/api/auth/signin"
@@ -33,6 +36,7 @@ def fetch_transactions():
         return None, str(e)
 
 @app.route('/')
+@cross_origin()
 def get_transactions():
     data, error = fetch_transactions()
     if error:
@@ -40,6 +44,7 @@ def get_transactions():
     return jsonify(data)
 
 @app.route('/chatbot', methods=['POST'])
+@cross_origin()
 def chatbot():
     # Fetch the transactions data
     data, error = fetch_transactions()
