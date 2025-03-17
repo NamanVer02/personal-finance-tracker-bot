@@ -1,4 +1,3 @@
-# bot.py
 from langchain_groq import ChatGroq
 from langchain.chains import RetrievalQA
 from langchain.text_splitter import CharacterTextSplitter
@@ -51,7 +50,7 @@ def generate_response(json_data, query):
     # Define a custom prompt template for concise answers
     prompt_template = PromptTemplate(
         input_variables=["context", "question"],
-        template="Context: {context}\n\nQuestion: {question}\n\nAnswer: Provide only the final answer in a single line without any explanation or reasoning."
+        template="Context: {context}\n\nQuestion: {question}\n\nAnswer: Provide a simple and concise answer to the user's question with proper reasoning and context reference."
     )
     
     # Create the retrieval chain with the custom prompt
