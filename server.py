@@ -10,7 +10,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 # Hardcoded credentials and URLs
 LOGIN_URL = "http://localhost:8080/api/auth/signin"
 TRANSACTIONS_URL = "http://localhost:8080/api/get/admin/transactions"
-CREDENTIALS = {"username": "admin", "password": "admin"}
+CREDENTIALS = {"username": "admin", "password": "admin", "twoFactorCode": "185194"}
 
 # Function to fetch transactions data
 def fetch_transactions():
@@ -18,7 +18,8 @@ def fetch_transactions():
         # Step 1: Authenticate and get JWT token
         auth_response = requests.post(LOGIN_URL, json=CREDENTIALS)
         auth_response.raise_for_status()  # Raise an error for bad status codes
-        token = auth_response.json().get('token')  # Assuming the token is returned in a 'token' field
+        print(auth_response.json())
+        token = auth_response.json().get('accessToken')  # Assuming the token is returned in a 'token' field
 
         if not token:
             return None, "Authentication failed, no token received"
