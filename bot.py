@@ -69,4 +69,4 @@ def generate_response(json_data, query):
     # Extract the response and format it as a JSON object
     response = result.get("result", "No response generated.")
 
-    return {"response": response.split("\n\n")[-1]}  # Return the response as a JSON object
+    return {"response": response}  # Return the response as a JSON object
